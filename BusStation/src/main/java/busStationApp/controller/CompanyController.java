@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,7 @@ public class CompanyController {
 	@Autowired
 	private CompanyDtoToCompany toCompany;
 	
+	//@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<CompanyDTO>> getAll () {
 		
@@ -41,6 +43,7 @@ public class CompanyController {
 		return new ResponseEntity<>(toCompanyDto.convert(companies), HttpStatus.OK);
 	}
 	
+	//@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <CompanyDTO> create (@Valid @RequestBody CompanyDTO companyDTO) {
 		

@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class LineController {
 	@Autowired
 	private LineDtoToLine toLine;
 	
+	//@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<LineDTO>> getAll(@RequestParam(required=false) String destination,
 			@RequestParam(required=false) Long companyId,
@@ -53,6 +55,7 @@ public class LineController {
         return new ResponseEntity<>(toLineDto.convert(linePage.getContent()), responseHeaders, HttpStatus.OK);
     }
 	
+	//@PreAuthorize("hasAnyRole('KORISNIK', 'ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity <LineDTO> get(@PathVariable Long id) {
 		Line line = lineService.findOne(id);
@@ -64,6 +67,7 @@ public class LineController {
         }
 	}
 	
+	//@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <LineDTO> create (@Valid @RequestBody LineDTO lineDTO) {
 		
@@ -73,6 +77,7 @@ public class LineController {
 		return new ResponseEntity<>(toLineDto.convert(savedLine), HttpStatus.CREATED);
 	}
 	
+	//@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LineDTO> update(@PathVariable Long id, @Valid @RequestBody LineDTO lineDTO){
 
@@ -86,6 +91,7 @@ public class LineController {
         return new ResponseEntity<>(toLineDto.convert(savedLine),HttpStatus.OK);
     }
 	
+	//@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
 		Line deleteLine = lineService.delete(id);

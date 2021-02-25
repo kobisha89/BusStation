@@ -105,9 +105,14 @@ class Line extends React.Component {
                     <td>{line.companyDTO.name}</td>
                     <td><button className="btn btn-primary" onClick={() => this.edit(line.id)}>Edit</button></td>
                     <td><button className="btn btn-danger" onClick={() => this.delete(line.id)}>Delete</button></td>
+                    <td><button className="btn btn-success" onClick={() => this.reservation(line.id)}>Reserve</button></td>
                 </tr>
             )
         })
+    }
+
+    reservation(lineId) {
+        this.props.history.push('/lines/reservation/'+ lineId);
     }
 
     edit(lineId) {

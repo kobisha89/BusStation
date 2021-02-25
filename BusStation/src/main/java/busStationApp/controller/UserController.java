@@ -62,7 +62,7 @@ public class UserController {@Autowired
 	private TokenUtils tokenUtils;
 
 
-	@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600) // moze i bez http:// dela
+	@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDTO> get(@PathVariable Long id){
 		Optional<User> user = userService.one(id);
@@ -123,9 +123,6 @@ public class UserController {@Autowired
 	public ResponseEntity<UserDTO> edit(
 			@PathVariable Long id,
 			@RequestBody UserDTO reqBody){
-		
-		// pošto ne koristimo ovu metodu za izmenu lozinke, 
-		// možemo primati UserDto koji nema ovo polje
 		
 		if(!id.equals(reqBody.getId())) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -9,6 +9,7 @@ import Login from './components/login/Login';
 import Line from './components/line/Line';
 import AddLine from './components/line/AddLine';
 import EditLine from './components/line/EditLine';
+import Reservation from './components/line/Reservation';
 
 class App extends React.Component{
     render() {
@@ -34,6 +35,7 @@ class App extends React.Component{
                             <Route exact path="/lines" component={Line} />
                             <Route exact path="/lines/add" component={AddLine}/>
                             <Route exact path="/lines/edit/:id" component={EditLine} />
+                            <Route exact path="/lines/reservation/:id" component={Reservation} />
                             <Route exact path="/login" component={Login}/>
                     </Switch>
                     </Container>
