@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Button, Col, Form, InputGroup} from 'react-bootstrap'
+import {Table, Button, Form} from 'react-bootstrap'
 import Axios from '../../apis/Axios';
 
 class Line extends React.Component {
@@ -103,20 +103,30 @@ class Line extends React.Component {
                     <td>{line.scheduled}</td>
                     <td>{line.destination}</td>
                     <td>{line.companyDTO.name}</td>
+                    <td><button className="btn btn-primary" onClick={() => this.edit(line.id)}>Edit</button></td>
                     <td><button className="btn btn-danger" onClick={() => this.delete(line.id)}>Delete</button></td>
                 </tr>
             )
         })
     }
 
+    edit(lineId) {
+        this.props.history.push('/lines/edit/'+ lineId);
+    }
+
     search() {
         this.getLines();
     }
+
+    addLine() {
+        this.props.history.push('/lines/add')
+    } 
 
     render() {
         return (
             <div>
                 <h1>Lines</h1>
+                <Button className="btn btn-primary" type="submit" onClick = {() => this.addLine()}>Add line</Button><br/>
                 <Form>
                     <Form.Label htmlFor="lDestination">Destination</Form.Label><br/>
                     <Form.Control id="lDestination" name="destination" type="text" value={this.state.search.destination} onChange={(e) => this.searchValueChange(e)}/><br/>
@@ -156,8 +166,8 @@ class Line extends React.Component {
                         </tbody>
                 </Table>
                     <div>
-                        <button disabled={this.state.pageNo==0} className="btn btn-primary" onClick={() =>this.getLines(this.state.pageNo = this.state.pageNo - 1)}>Previous</button>
-                        <button disabled={this.state.pageNo==this.state.totalPages-1} className="btn btn-primary" onClick={() =>this.getLines(this.state.pageNo = this.state.pageNo + 1)}>Next</button>
+                        <Button disabled={this.state.pageNo==0} className="btn btn-primary" onClick={() =>this.getLines(this.state.pageNo = this.state.pageNo - 1)}>Previous</Button>
+                        <Button disabled={this.state.pageNo==this.state.totalPages-1} className="btn btn-primary" onClick={() =>this.getLines(this.state.pageNo = this.state.pageNo + 1)}>Next</Button>
                     </div>
                 </div>    
             </div>

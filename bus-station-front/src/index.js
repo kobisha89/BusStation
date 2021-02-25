@@ -7,6 +7,8 @@ import Home from './components/Home';
 import {logout} from './services/auth';
 import Login from './components/login/Login';
 import Line from './components/line/Line';
+import AddLine from './components/line/AddLine';
+import EditLine from './components/line/EditLine';
 
 class App extends React.Component{
     render() {
@@ -30,6 +32,8 @@ class App extends React.Component{
                     <Switch>
                             <Route exact path="/" component={Home} />
                             <Route exact path="/lines" component={Line} />
+                            <Route exact path="/lines/add" component={AddLine}/>
+                            <Route exact path="/lines/edit/:id" component={EditLine} />
                             <Route exact path="/login" component={Login}/>
                     </Switch>
                     </Container>
