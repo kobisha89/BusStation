@@ -1,6 +1,8 @@
 import React from 'react';
 import Axios from '../../apis/Axios';
 import {Button, Form} from 'react-bootstrap'
+import getCompaniesAction from "../../actions/GetCompanies";
+import { connect } from "react-redux";
 
 class AddLine extends React.Component {
 
@@ -19,7 +21,7 @@ class AddLine extends React.Component {
     }
 
     componentDidMount(){
-        this.getCompanies();
+        this.props.getCompanies();
     }
 
     getCompanies() {
@@ -53,7 +55,7 @@ class AddLine extends React.Component {
     companySelectionChange(e) {
 
         let companyId = e.target.value;
-        let company = this.state.companies.find((company) => company.id == companyId);
+        let company = this.props.companies.find((company) => company.id == companyId);
         console.log(company)
 
         let line = this.state.line;
@@ -110,7 +112,7 @@ class AddLine extends React.Component {
                     <Form.Control as="select" id="lcompanyDTO" onChange={event => this.companySelectionChange(event)}>
                         <option></option>
                         {
-                            this.state.companies.map((company) => {
+                            this.props.companies.map((company) => {
                                 return (
                                     <option key={company.id} value={company.id}>
                                         {company.name}
@@ -126,4 +128,11 @@ class AddLine extends React.Component {
         )
     }
 }
-export default AddLine;
+const mapStateToProps = (state, ownProps) => {
+    // console.log(state);
+    return { companies: state.companies };
+  };
+  
+  export default connect(mapStateToProps, {
+    getCompanies: getCompaniesAction,
+  })(AddLine);

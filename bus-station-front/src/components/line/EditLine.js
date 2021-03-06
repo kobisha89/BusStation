@@ -113,7 +113,7 @@ class EditLine extends React.Component {
                     <Form.Control id="lScheduled" type="text" value={this.state.lineScheduled} onChange={(e) => this.onScheduledChange(e)}/><br/>
                     <Form.Label htmlFor="lDestination">Destination</Form.Label><br/>
                     <Form.Control id="lDestination" type="text" value={this.state.lineDestination} onChange={(e) => this.onDestinationChange(e)}/><br/>
-                    <Button className="button btn-primary" onClick={() => this.edit()}>Edit</Button>
+                    <Button className="btn btn-primary" onClick={() => this.edit()}>Edit</Button>
                 </Form>
             </div>
         )

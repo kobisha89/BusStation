@@ -10,6 +10,10 @@ import Line from './components/line/Line';
 import AddLine from './components/line/AddLine';
 import EditLine from './components/line/EditLine';
 import Reservation from './components/line/Reservation';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
+import reducers from './reducers';
 
 class App extends React.Component{
     render() {
@@ -46,7 +50,11 @@ class App extends React.Component{
 
 }
 
+let storeEnhancer = applyMiddleware(thunk);
+
 ReactDOM.render(
-    <App/>,
-    document.querySelector('#root')
+ <Provider store={createStore(reducers, storeEnhancer)}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
 );
